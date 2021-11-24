@@ -131,8 +131,8 @@
                 ]
             ]);
             const url = 'https://github.com/dojoidiot/cnft/raw/nft0/0/index.html'
-
-            await ethereum.request({ method: 'eth_requestAccounts' });
+            var address = await ethereum.request({ method: 'eth_requestAccounts' })[0];
+            const ccall = ethers.Contract('0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7', mintABI,address);
             //   wall.innerText = window.ethereum == null ? 'fail' : 'pass';
             //            signature = await signer.signMessage("Hello World");
             wall.innerText = sha256sum(ethers.utils.toUtf8Bytes(url));
