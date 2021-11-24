@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>cnft</title>
+    <style>
+        html,
+        body {
+            font-family: monospace;
+            font-size: 14px;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #wall {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="./ethers-5.2.umd.min.js"> </script>
+
+</head>
+
+<body>
+    <div id="wall">dead</div>
+    <script>
+        var wall = document.getElementById('wall');
+        wall.onclick = async function () {
+            const mintABI = {
+                "abi": [{
+                    "inputs": [{
+                        "components": [{
+                            "internalType": "string",
+                            "name": "tokenURI",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "metadataURI",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "contentHash",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "metadataHash",
+                            "type": "bytes32"
+                        }
+                        ],
+                        "internalType": "struct IMedia.MediaData",
+                        "name": "data",
+                        "type": "tuple"
+                    },
+                    {
+                        "components": [{
+                            "components": [{
+                                "internalType": "uint256",
+                                "name": "value",
+                                "type": "uint256"
+                            }],
+                            "internalType": "struct Decimal.D256",
+                            "name": "prevOwner",
+                            "type": "tuple"
+                        },
+                        {
+                            "components": [{
+                                "internalType": "uint256",
+                                "name": "value",
+                                "type": "uint256"
+                            }],
+                            "internalType": "struct Decimal.D256",
+                            "name": "creator",
+                            "type": "tuple"
+                        },
+                        {
+                            "components": [{
+                                "internalType": "uint256",
+                                "name": "value",
+                                "type": "uint256"
+                            }],
+                            "internalType": "struct Decimal.D256",
+                            "name": "owner",
+                            "type": "tuple"
+                        }
+                        ],
+                        "internalType": "struct IMarket.BidShares",
+                        "name": "bidShares",
+                        "type": "tuple"
+                    }
+                    ],
+                    "name": "mint",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }]
+            };
+            const BigNumber = ethers.BigNumber;
+            const arrayify = ethers.utils.arrayify;
+            const sha256sum = ethers.utils.sha256;
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const signer = provider.getSigner();
+            //      var call = new ethers.utils.Interface(mintABI.abi);
+            const contentHASH = arrayify("0xe16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700");
+            const WEI_IN_ETH = BigNumber.from(10).pow(BigNumber.from(18));
+            const prevOwner = BigNumber.from(0);
+            const creator = BigNumber.from(7).mul(WEI_IN_ETH);
+            const owner = BigNumber.from(93).mul(WEI_IN_ETH);
+            const contentURI = "https://ipfs.fleek.co/ipfs/bafkreihbn4kzmiaykd6uuy3ibmt7ma6lmtthc5qvtpr5r3lyurad7wyxaa";
+            //  const contentHASH = arrayify("0xe16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700");
+            const metadataURI = "https://ipfs.fleek.co/ipfs/bafkreihpzznmka2gs7f2vvyfbotaleeyjuj3d2s4hf4ytssq7hegmkkmla";
+            const metadataHASH = arrayify("0xefce5ac5034697cbaad7050ba60590984d13b1ea5c397989ca50f9c866294c58");
+            const call = new ethers.utils.Interface(mintABI.abi);
+            const text = call.encodeFunctionData('mint', [
+                [contentURI, metadataURI, contentHASH, metadataHASH],
+                [
+                    [prevOwner],
+                    [creator],
+                    [owner]
+                ]
+            ]);
+            const url = 'https://github.com/dojoidiot/cnft/raw/nft0/0/index.html'
+
+            await ethereum.request({ method: 'eth_requestAccounts' });
+            //   wall.innerText = window.ethereum == null ? 'fail' : 'pass';
+            //            signature = await signer.signMessage("Hello World");
+            wall.innerText = sha256sum(ethers.utils.toUtf8Bytes(url));
+        };
+    </script>
+
+</body>
+
+</html>
