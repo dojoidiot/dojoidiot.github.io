@@ -1,0 +1,6 @@
+{
+    "description": "The CNFT series explores the use of code in non fungible tokens by minting code to answer questions and guide the development of the next token.  Question 0 answers the question that must be answered before we can ask a question - how do we mint an HTML NFT?",
+    "mimeType": "text/html",
+    "name": "CNFT/0",
+    "version": "zora-20200101"
+}
