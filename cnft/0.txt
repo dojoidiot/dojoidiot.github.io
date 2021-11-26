@@ -1,3 +1,6 @@
-Q0
+q0
 https://dojoidiot.github.io/cnft/196c8c862a1d44e64fcdb4e5659ca29b34ad2b38f97e5443bbd24593f3eb5cbb.html
 https://dojoidiot.github.io/cnft/580baa6beada75f63a508eddef50e2c564a137ac74778c1700f3f289a17865f4.json
+q1
+https://dojoidiot.github.io/cnft/90bd84e962a941103150fd5c720629bb53c08a6b0b3e7225a024afee9ad63b93.html
+https://dojoidiot.github.io/cnft/e519ae0f747d8ee01c85945cc521ef003d415be2dfed02fe628e4d311a902801.json

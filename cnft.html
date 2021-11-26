@@ -27,14 +27,20 @@
     <h3>the cnft collection</h3>
     a cnft is a code non fungible token. the cnft collection explores the questions - are cnfts feasible and what can
     you do with them? each cnft is designed to answer a particular question, and the answer to each question then leads
-    to the development of the next question. search for the dojoidiot at https://zora.co to find the
-    cnft collection.
+    to the development of the next question. we ask these questions using the zora.co media protocol.
     <h3>the questions</h3>
     <ol start="0">
-        <li>question: can we mint a cnft? This is not as easy as it sounds because the zora site does
-            not allow file types of text/html to be loaded into the user interface. To answer this question we have to
-            make our own program to mint our cnft artefacts and metadata. <br/>answer: yes we can. go to
+        <li>question: how do we mint an html nft? this is not as easy as it sounds because the zora site does
+            not allow file types of text/html to be loaded into the user interface. to answer this question we have to
+            make our own program to mint our cnft artefacts and metadata. <br />answer: yes we can. go to
             https://zora.co/collections/zora/6337 to see that the test is a pass.</li>
+        <li>question: do javascript, offscreen canvas sizing, and font size calculations work? this tests how the sizing
+            and drawing works embedded in the zora site. while it looks simple, it is actually doing an off screen font
+            size calculation, a containing div size calculation, and then determining the row and column count required
+            to fill the space with chars printed as html. +/- are used as proportional characters of different width and
+            height to see that it all works pixel perfect and no gaps or scroll bars appear. you can select the text to
+            see that it is doing the font math and screen math correctly to translate from canvas font calculations back
+            to web page placement.</li>
     </ol>
 </body>
 
