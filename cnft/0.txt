@@ -4,3 +4,6 @@ https://dojoidiot.github.io/cnft/580baa6beada75f63a508eddef50e2c564a137ac74778c1
 q1
 https://dojoidiot.github.io/cnft/90bd84e962a941103150fd5c720629bb53c08a6b0b3e7225a024afee9ad63b93.html
 https://dojoidiot.github.io/cnft/e519ae0f747d8ee01c85945cc521ef003d415be2dfed02fe628e4d311a902801.json
+q2
+https://dojoidiot.github.io/cnft/46ffe2bd10ea2b6e53bf7c44d79c2b46e466151f01990da09ff9a29af8e0e8f8.html
+https://dojoidiot.github.io/cnft/a4358d93a57f364ff8d69220d19f89cbd2ab8b0b96d85a927791391c935bb20e.json

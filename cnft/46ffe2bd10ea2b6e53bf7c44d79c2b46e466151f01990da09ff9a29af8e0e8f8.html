@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>cnft:q2</title>
+    <style>
+        html,
+        body {
+            font-family: monospace;
+            font-size: 14px;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #blot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            background: rgb(209,214,228);
+        }
+    </style>
+    <script>
+        function draw(blot, {
+            size = ri(10, 100),
+            iter = 100
+        } = {}) {
+            const w = blot.width;
+            const h = blot.height;
+
+            const d = new Array(h).fill(true).map(() => new Array(w).fill(0));
+
+            const get = (x, y) => {
+                if (x < 0 || x >= w || y < 0 || y >= h) {
+                    return 0;
+                }
+                return d[y][x];
+            };
+
+            const set = (x, y, value) => {
+                if (x >= 0 && x < w && y >= 0 && y < h) {
+                    d[y][x] = value;
+                }
+            };
+
+            let l = [ri(0, w), ri(0, h)];
+            for (let i = 0; i < size; i++) {
+                const n = Math.random() < 0.9
+                    ? l.map(v => v + (ri(0, 50) - 25))
+                    : [ri(0, w), ri(0, h)];
+                set(...n, ri(1, Math.pow(iter, 4)));
+                l = n;
+            }
+
+            for (let i = 0; i < iter; i++) {
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const s0 = get(x, y);
+                        const s1 = get(x, y - 1);
+                        const s2 = get(x + 1, y - 1);
+                        const s3 = get(x + 1, y);
+                        const s4 = get(x + 1, y + 1);
+                        const s5 = get(x, y + 1);
+                        const s6 = get(x - 1, y + 1);
+                        const s7 = get(x - 1, y);
+                        const s8 = get(x - 1, y - 1);
+                        set(x, y, (s0 + s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8) / 9);
+                    }
+                }
+            }
+
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    if (get(x, y) < iter * 0.25) {
+                        set(x, y, 0);
+                    }
+                }
+            }
+
+            const ctx = blot.getContext('2d');
+            for (let y = 0; y < blot.height; y++) {
+                for (let x = 0; x < blot.width / 2; x++) {
+                    const v = get(x, y);
+                    ctx.fillStyle = `rgba(15, 15, 71, ${v / iter})`;
+                    ctx.fillRect(x, y, 1, 1);
+                    ctx.fillRect(blot.width - (x + 1), y, 1, 1);
+                }
+            }
+        }
+
+        function ri(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="blot" width="0444" height="0444">
+    </canvas>
+    <script>
+        var blot = document.getElementById('blot');
+        var cx2d = blot.getContext('2d');
+        var iter = 0;
+        draw(blot, {
+            size: ri(10, 100),
+            iter: 50
+        });
+        setInterval(function () {
+            cx2d.clearRect(0, 0, blot.width, blot.height);
+            if (iter % 2 == 0) {
+                cx2d.clearRect(0, 0, blot.width, blot.height);
+            } else {
+                draw(blot, {
+                    size: ri(10, 100),
+                    iter: 50
+                });
+            }
+            iter += 1;
+        }, 3000);
+    </script>
+
+</body>
+
+</html>
